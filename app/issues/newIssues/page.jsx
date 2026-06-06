@@ -9,35 +9,23 @@ import "easymde/dist/easymde.min.css";
 import { useForm, Controller } from "react-hook-form"
 import axios from 'axios';
 import { validate } from "../../api/zodValidation/Validation";
-import ErrorMessage from '../components/ErrorMessage';
+import Notification from '../components/Notification';
 import SpinnerLil from '../components/SpinnerLil';
 import SpinnerBig from '../components/SpinnerBig';
+import {useNotif} from '../hook/useNotif';
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,
-  loading: () => <SpinnerBig />
+  loading: () => <div className='flex justify-center items-center' ><SpinnerBig /></div>
 });
 
 const NewIssues = () => {
   const { register, control, handleSubmit } = useForm();
   const router = useRouter();
   const [err, setErr] = useState('');
-  const [isVisible, setIsVisible] = useState(false);
   const [spinner, setSpinner] = useState(false);
+  const isNotifVisible = useNotif(err,setErr, 2500);
 
-  useEffect(() => {
-    if (!err) return;
-
-    setIsVisible(true);
-
-    const fadeOutTimer = setTimeout(() => setIsVisible(false), 2500);
-    const removeTimer = setTimeout(() => setErr(''), 2800);
-
-    return () => {
-      clearTimeout(fadeOutTimer);
-      clearTimeout(removeTimer);
-    };
-  }, [err]);
 
   const fnCreateIssues = async (data) => {
     try {
@@ -52,7 +40,9 @@ const NewIssues = () => {
 
   return (
     <div>
-      {err && <ErrorMessage isVisible={isVisible}>{err}</ErrorMessage>}
+      {err && <Notification color="red" isVisible={isNotifVisible}>
+        {err}
+      </Notification>}
       <form onSubmit={handleSubmit(fnCreateIssues)} className="max-w-xl space-y-5">
         <TextField.Root placeholder="Issues Title" {...register('title')} />
         <Controller
