@@ -4,14 +4,18 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import React from 'react'
 import dynamic from 'next/dynamic';
-import { Button, Callout, TextField } from "@radix-ui/themes";
+import { Button, TextField } from "@radix-ui/themes";
 import "easymde/dist/easymde.min.css";
 import { useForm, Controller } from "react-hook-form"
 import axios from 'axios';
+import { validate } from "../../api/zodValidation/Validation";
+import ErrorMessage from '../components/ErrorMessage';
+import SpinnerLil from '../components/SpinnerLil';
+import SpinnerBig from '../components/SpinnerBig';
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,
-  loading: () => <p>Loading editor...</p>,
+  loading: () => <SpinnerBig />
 });
 
 const NewIssues = () => {
@@ -19,6 +23,7 @@ const NewIssues = () => {
   const router = useRouter();
   const [err, setErr] = useState('');
   const [isVisible, setIsVisible] = useState(false);
+  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
     if (!err) return;
@@ -37,22 +42,17 @@ const NewIssues = () => {
   const fnCreateIssues = async (data) => {
     try {
       await axios.post('/api/createIssues', data);
+      setSpinner(false);
       router.push('/issues');
     } catch (error) {
       setErr('Failed to create issue. Please try again.');
+      setSpinner(false);
     }
   };
 
   return (
     <div>
-      {err && (
-        <Callout.Root
-          color="red"
-          className={`mb-3 transition-opacity duration-300 ease-in-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-        >
-          <Callout.Text>{err}</Callout.Text>
-        </Callout.Root>
-      )}
+      {err && <ErrorMessage isVisible={isVisible}>{err}</ErrorMessage>}
       <form onSubmit={handleSubmit(fnCreateIssues)} className="max-w-xl space-y-5">
         <TextField.Root placeholder="Issues Title" {...register('title')} />
         <Controller
@@ -66,7 +66,8 @@ const NewIssues = () => {
             />
           )}
         />
-        <Button type="submit">submit</Button>
+        <Button type="submit" onClick={() => setSpinner(true)}>submit {spinner && <SpinnerLil />}</Button>
+        {/* also you can add disabled attribute for client that dont click anu more.... but i prefer to dont use it */}
       </form>
     </div>
   );
