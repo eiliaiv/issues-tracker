@@ -8,7 +8,7 @@ export async function POST(request) {
     const validation = issuesSchema.safeParse(body);
 
     if (!validation.success) {
-      return NextResponse.json({ error: validation.error.flatten() }, { status: 400 });
+      return NextResponse.json({ error: validation.error.format() }, { status: 400 });
     }
 
     await prisma.issues.create({
