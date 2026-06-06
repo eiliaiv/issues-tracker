@@ -42,7 +42,7 @@ const IssuesPage = () => {
           <Table.Row>
             <Table.ColumnHeaderCell>issues</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>status</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>created</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">created</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -50,7 +50,7 @@ const IssuesPage = () => {
             <Table.Row key={item.id}>
               <Table.Cell>{item.title}</Table.Cell>
               <Table.Cell>{item.status}</Table.Cell>
-              <Table.Cell>{item.createdAt}</Table.Cell>
+              <Table.Cell className="hidden md:table-cell">{item.createdAt}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
