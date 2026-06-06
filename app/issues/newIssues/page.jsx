@@ -1,9 +1,13 @@
 'use client'
+
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import React from 'react'
 import dynamic from 'next/dynamic';
 import { Button, TextField } from "@radix-ui/themes";
 import "easymde/dist/easymde.min.css";
+import { useForm, Controller } from "react-hook-form"
+import axios from 'axios';
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,
@@ -11,26 +15,30 @@ const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
 });
 
 const NewIssues = () => {
-  const [value, setValue] = useState("");
-  const [description, setDescription] = useState("");
-  const fnCreateIssues = async () =>{
-    const res = await fetch("/api/createIssues",{
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({
-        title: value,
-      })
-    })
-    
+  const { register, control, handleSubmit } = useForm();
+  const router = useRouter();
+
+  const fnCreateIssues = async (data) => {
+    await axios.post('/api/createIssues', data);
+    router.push('/issues');
   }
-  console.log(value);
   return (
-    <div className="max-w-xl space-y-5">
-      <TextField.Root placeholder="Issues Title" onChange={(e) => setValue(e.target.value)} value={value}>
+    <form onSubmit={handleSubmit(fnCreateIssues)} className="max-w-xl space-y-5">
+      <TextField.Root placeholder="Issues Title" {...register('title')}>
       </TextField.Root>
-      <SimpleMDE placeholder="Issues Description" />
-      <Button>submit</Button>
-    </div>
+      <Controller
+        name="description"
+        control={control}
+        render={({ field }) => (
+          <SimpleMDE
+            placeholder="Issues Description"
+            value={field.value || ""}
+            onChange={field.onChange}
+          />
+        )}
+      />
+      <Button type="submit">submit</Button>
+    </form>
   )
 }
 
