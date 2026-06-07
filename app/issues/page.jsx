@@ -22,6 +22,7 @@ const IssuesPage = () => {
       const res = await axios.get("/api/readIssues");
       setIssues(res.data || []);
       setSpinner(false);
+
     } catch (err) {
       setErr('Failed to get issues from server. check your connection');
       setSpinner(false);
@@ -49,7 +50,9 @@ const IssuesPage = () => {
         <Table.Body>
           {issues.map((item) => (
             <Table.Row key={item.id}>
-              <Table.Cell>{item.title}</Table.Cell>
+              <Table.Cell>
+                <Link href={`/issues/${item.id}`}>{item.title}</Link>
+              </Table.Cell>
               <Table.Cell><IssuesStatus status={item.status} /></Table.Cell>
               <Table.Cell className="hidden md:table-cell">{item.createdAt}</Table.Cell>
             </Table.Row>
