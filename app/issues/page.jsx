@@ -8,6 +8,7 @@ import Notification from './components/Notification';
 import { useState, useEffect } from 'react';
 import { useNotif } from './hook/useNotif';
 import SpinnerBig from './components/SpinnerBig';
+import IssuesStatus from './components/IssuesStatus';
 
 
 const IssuesPage = () => {
@@ -49,7 +50,7 @@ const IssuesPage = () => {
           {issues.map((item) => (
             <Table.Row key={item.id}>
               <Table.Cell>{item.title}</Table.Cell>
-              <Table.Cell>{item.status}</Table.Cell>
+              <Table.Cell><IssuesStatus status={item.status} /></Table.Cell>
               <Table.Cell className="hidden md:table-cell">{item.createdAt}</Table.Cell>
             </Table.Row>
           ))}
