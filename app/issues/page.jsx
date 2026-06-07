@@ -9,23 +9,27 @@ import { useState, useEffect } from 'react';
 import { useNotif } from './hook/useNotif';
 import SpinnerBig from './components/SpinnerBig';
 import IssuesStatus from './components/IssuesStatus';
+import { ReloadIcon } from '@radix-ui/react-icons';
 
 
 const IssuesPage = () => {
   const [err, setErr] = useState('');
   const [spinner, setSpinner] = useState(true);
   const [issues, setIssues] = useState([]);
-  const isVisible = useNotif(err, setErr, 2500);
+  const isVisible = useNotif(err, setErr, 1700);
+  const [reload, setReload] = useState(false);
 
   const fnGetIssues = async () => {
     try {
       const res = await axios.get("/api/readIssues");
       setIssues(res.data || []);
       setSpinner(false);
+      setReload(false);
 
     } catch (err) {
       setErr('Failed to get issues from server. check your connection');
       setSpinner(false);
+      setReload(true);
     }
   }
   useEffect(() => {
@@ -65,6 +69,14 @@ const IssuesPage = () => {
           Create New Issue
         </Link>
       </Button>
+      {reload && <span className="ml-5">
+        <Button onClick={() => {
+          fnGetIssues();
+          setSpinner(true);
+        }}>
+          <ReloadIcon />
+          Reload</Button>
+      </span>}
     </div>
 
   )
