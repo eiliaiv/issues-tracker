@@ -3,20 +3,18 @@
 import React from 'react';
 import prisma from '../../lib/client';
 import { notFound } from 'next/navigation';
-import { Card, Flex, Heading,Grid, Box, Button } from '@radix-ui/themes';
+import { Card, Flex, Heading, Grid, Box, Button } from '@radix-ui/themes';
 import IssuesStatus from '../components/IssuesStatus';
 import Markdown from 'react-markdown';
 import { Pencil2Icon } from '@radix-ui/react-icons';
 import Link from 'next/link';
+import DeleteButton from '../components/DeleteButton';
+import EditButton from '../components/EditButton';
 
 
 const IssuesDetailPage = async ({ params }) => {
   const { id } = await params;
-  const issueId = Number(id);
-
-  if (!Number.isInteger(issueId)) {
-    notFound();
-  }
+  const issueId = await Number(id);
 
   const issues = await prisma.issues.findUnique({
     where: {
@@ -27,7 +25,8 @@ const IssuesDetailPage = async ({ params }) => {
   if (!issues)
     notFound();
 
-  
+
+
   return (
     <div className='flex flex-col gap-7'>
       <div className='space-y-5'>
@@ -40,9 +39,10 @@ const IssuesDetailPage = async ({ params }) => {
         </div>
         <Card><Markdown>{issues.description}</Markdown></Card>
       </div>
-      <Link href={`/issues/${issues.id}/edit`}>
-        <Button><Pencil2Icon /> Edit</Button>
-      </Link>
+      <div className='flex flex-row'>
+        <EditButton id={issues.id} />
+        <DeleteButton  id={issues.id} title={issues.title}/>
+      </div>
     </div>
   );
 };

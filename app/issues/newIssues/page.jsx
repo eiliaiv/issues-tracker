@@ -8,7 +8,6 @@ import { Button, TextField } from "@radix-ui/themes";
 import "easymde/dist/easymde.min.css";
 import { useForm, Controller } from "react-hook-form"
 import axios from 'axios';
-import { validate } from "../../api/zodValidation/Validation";
 import Notification from '../components/Notification';
 import SpinnerLil from '../components/SpinnerLil';
 import SpinnerBig from '../components/SpinnerBig';

@@ -4,10 +4,8 @@ import prisma from '../../../lib/client'
 import EditForm from './EditForm'
 
 const Page = async ({ params }) => {
-  const { id } = await params
-  const issueId = Number(id)
-
-
+  const { id } = await params;
+  const issueId = Number(id);
 
   const issue = await prisma.issues.findUnique({ where: { id: issueId } })
 
