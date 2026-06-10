@@ -35,7 +35,6 @@ const IssuesPage = () => {
   useEffect(() => {
     fnGetIssues();
   }, [])
-
   return (
     <div className='space-y-5'>
       {err && (
