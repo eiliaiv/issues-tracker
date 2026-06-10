@@ -27,7 +27,7 @@ const DeleteButton = ({ id, title }) => {
     <div className='ml-5'>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button color="red"><TrashIcon />Delete</Button>
+          <Button disabled={spinner} color="red"><TrashIcon />Delete {spinner && <SpinnerLil color='red'/>}</Button>
         </AlertDialog.Trigger>
         <AlertDialog.Content maxWidth="450px">
           <AlertDialog.Title>Are you sure to delete "{title}"?</AlertDialog.Title>
@@ -46,7 +46,6 @@ const DeleteButton = ({ id, title }) => {
                 setSpinner(true)
               }}>
                 Confirm
-                {spinner && <SpinnerLil />}
               </Button>
             </AlertDialog.Action>
           </Flex>
