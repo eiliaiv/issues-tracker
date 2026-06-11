@@ -1,7 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div>hello</div>
+    <>
+      <div>hello</div>
+      <Link href="/api/auth/signin">sign in</Link>
+    </>
+
   );
 }
