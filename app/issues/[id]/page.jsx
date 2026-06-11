@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import prisma from '../../lib/client';
+import {prisma} from '../../lib/client';
 import { notFound } from 'next/navigation';
 import { Card, Flex, Heading, Grid, Box, Button } from '@radix-ui/themes';
 import IssuesStatus from '../components/IssuesStatus';

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "../../lib/client";
+import {prisma} from "../../lib/client";
 import { deleteIssueSchema } from "../zodValidation/Validation";
 
 export async function DELETE(request){
