@@ -7,7 +7,7 @@ export default function Home() {
   const { status, data: session } = useSession()
   return (
     <>
-      <div className="font-bold text-3xl">Hello, {session?.user?.name} </div>
+      <div className="font-bold text-3xl">Hello, {session?.user?.name || "nobody -___-"} </div>
     </>
 
   );
