@@ -8,3 +8,8 @@ export const issuesSchema = z.object({
 export const deleteIssueSchema = z.object({
   id: z.coerce.number().int().positive(),
 });
+export const loginoutSchema = z.object({
+  email: z.email(),
+  password: z.string().min(6),
+  name: z.string().min(1).optional(),
+})

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SpinnerLil = ({color="white" }) => {
+const Spinner = ({color="white"}) => {
   return (
     <span className='ml-3' role="status">
       <svg aria-hidden="true" className="w-4 h-4 text-neutral-tertiary animate-spin fill-brand" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -12,4 +12,4 @@ const SpinnerLil = ({color="white" }) => {
   )
 }
 
-export default SpinnerLil
+export default Spinner
