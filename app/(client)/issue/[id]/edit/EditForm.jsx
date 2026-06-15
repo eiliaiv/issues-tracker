@@ -39,7 +39,7 @@ const EditForm = ({ issue }) => {
         id: issue.id,
       })
       setSpinner(false)
-      router.push(`/issues/${issue.id}`)
+      router.push(`/issue/${issue.id}`)
     } catch (e) {
       setErr('Failed to update issue')
       setSpinner(false)

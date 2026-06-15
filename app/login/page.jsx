@@ -3,8 +3,8 @@
 import { useState } from "react"
 import { signIn } from "next-auth/react"
 import Spinner from "../components/Spinner"
-import Notification from "../issues/components/Notification"
-import { useNotif } from "../issues/hook/useNotif"
+import Notification from "../(client)/components/Notification"
+import { useNotif } from "../(client)/hook/useNotif"
 import Link from "next/link"
 
 const login = () => {

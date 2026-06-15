@@ -1,6 +1,6 @@
 import React from 'react'
 import { notFound } from 'next/navigation'
-import {prisma} from '../../../lib/client'
+import {prisma} from '../../../../lib/client'
 import EditForm from './EditForm'
 
 const Page = async ({ params }) => {

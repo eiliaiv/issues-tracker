@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import NavBar from "../app/layoutNavBar/NavBar";
+import NavBar from "./(client)/components/NavBar";
 import "@radix-ui/themes/styles.css";
-import { Theme } from "@radix-ui/themes";
-import Providers from './auth/Providers'
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,14 +31,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Providers>
-          <Theme>
-            <NavBar />
-            <main className="px-10">
-              {children}
-            </main>
-          </Theme>
-        </Providers>
+        {children}
       </body>
     </html>
   );

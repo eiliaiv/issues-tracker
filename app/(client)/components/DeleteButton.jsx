@@ -14,7 +14,7 @@ const DeleteButton = ({ id, title }) => {
   const fnDelete = async () => {
     try {
       await axios.delete("/api/deleteIssues", { data: { id } })
-      router.push("/issues");
+      router.push("/issue");
       setSpinner(false)
     } catch (error) {
       console.log("failed")

@@ -13,15 +13,14 @@ const NavBar = () => {
   const { status, data: session } = useSession();
   const router = useRouter();
   const links = [
-    { label: "dashboard", href: "/" },
-    { label: "issues", href: "/issues" },
+    { label: "issues", href: "/issue" },
   ]
 
   return (
     <nav className=" border-b mb-5 py-3 px-10">
       <div className='flex items-center justify-between'>
         <div className='flex items-center space-x-5'>
-          <Link href="/"><FaBug className="hover:scale-120 transition-transform" /></Link>
+          <FaBug className="hover:scale-150 transition-transform" />
           <ul className='flex space-x-6'>
             {links.map((link) => (
               <li key={link.href}>

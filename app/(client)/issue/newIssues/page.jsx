@@ -30,7 +30,7 @@ const NewIssues = () => {
     try {
       await axios.post('/api/createIssues', data);
       setSpinner(false);
-      router.push('/issues');
+      router.push('/issue');
     } catch (error) {
       setErr('Failed to create issue. Please try again.');
       setSpinner(false);

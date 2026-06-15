@@ -4,11 +4,11 @@ import React from 'react'
 import { Button, Table } from "@radix-ui/themes";
 import Link from 'next/link';
 import axios from 'axios';
-import Notification from './components/Notification';
+import Notification from '../components/Notification';
 import { useState, useEffect } from 'react';
-import { useNotif } from './hook/useNotif';
-import SpinnerBig from './components/SpinnerBig';
-import IssuesStatus from './components/IssuesStatus';
+import { useNotif } from '../hook/useNotif';
+import SpinnerBig from '../components/SpinnerBig';
+import IssuesStatus from '../components/IssuesStatus';
 import { ReloadIcon } from '@radix-ui/react-icons';
 
 
@@ -54,7 +54,7 @@ const IssuesPage = () => {
           {issues.map((item) => (
             <Table.Row key={item.id}>
               <Table.Cell>
-                <Link href={`/issues/${item.id}`}>{item.title}</Link>
+                <Link href={`/issue/${item.id}`}>{item.title}</Link>
               </Table.Cell>
               <Table.Cell><IssuesStatus status={item.status} /></Table.Cell>
               <Table.Cell className="hidden md:table-cell">{item.createdAt}</Table.Cell>
@@ -64,7 +64,7 @@ const IssuesPage = () => {
       </Table.Root>
       {spinner && <div className='flex justify-center items-center' ><SpinnerBig /></div>}
       <Button>
-        <Link href="/issues/newIssues">
+        <Link href="/issue/newIssues">
           Create New Issue
         </Link>
       </Button>
