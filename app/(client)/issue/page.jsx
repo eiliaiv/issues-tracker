@@ -21,7 +21,7 @@ const IssuesPage = () => {
 
   const fnGetIssues = async () => {
     try {
-      const res = await axios.get("/api/readIssues");
+      const res = await axios.get("/api/readIssuesClient");
       setIssues(res.data || []);
       setSpinner(false);
       setReload(false);

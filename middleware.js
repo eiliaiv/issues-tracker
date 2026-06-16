@@ -1,3 +1,4 @@
+import { getToken } from "next-auth/jwt";
 import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
@@ -5,6 +6,10 @@ export default withAuth(
   (req) => {
     const role = req.nextauth?.token?.role;
     const pathname = req.nextUrl.pathname;
+    const token = getToken()
+    if (!token) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
 
     if (!role) {
       return NextResponse.redirect(new URL("/", req.url));
@@ -18,7 +23,7 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized: ({ token }) => !!token,
+      authorized: () => true,
     },
   }
 );
