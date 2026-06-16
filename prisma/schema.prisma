@@ -7,13 +7,15 @@ datasource db {
   provider = "postgresql"
 }
 
-model issues {
+model Issues {
   id          Int      @id @default(autoincrement())
   title       String
   description String   @db.Text
   status      Status   @default(OPEN)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  userId String
+  user User @relation(fields: [userId], references: [id]) 
 
 }
 
@@ -30,7 +32,7 @@ model User {
   emailVerified DateTime?
   image         String?
   role Role @default(CLIENT)
-
+  issues Issues[]
   accounts      Account[]
   sessions      Session[]
 }

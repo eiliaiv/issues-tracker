@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import {prisma} from '../../../lib/client';
+import { prisma } from '../../../lib/client';
 import { notFound } from 'next/navigation';
 import { Card, Flex, Heading, Grid, Box, Button } from '@radix-ui/themes';
 import IssuesStatus from '../../../(client)/components/IssuesStatus';
@@ -19,6 +19,13 @@ const adminDetailIss = async ({ params }) => {
   const issues = await prisma.issues.findUnique({
     where: {
       id: issueId
+    },
+    include: {
+      user: {
+        select: {
+          email: true,
+        }
+      }
     }
   });
 
@@ -26,14 +33,17 @@ const adminDetailIss = async ({ params }) => {
     notFound();
 
 
-
+  console.log(issues)
   return (
     <div className='flex flex-col gap-7'>
       <div className='space-y-5'>
-        <div className='flex flex-col md:flex-row md:justify-between'>
-          <Heading>{issues.title}</Heading>
-          <div className='flex gap-3'>
-            <IssuesStatus status={issues.status} />
+        <div className='flex flex-col gap-3 md:flex-row md:justify-between md:items-center '>
+          <div>
+            <Heading>{issues.title}</Heading>
+            <p className='text-lg font-bold'>client: <span className='font-thin'>{issues.user?.email}</span></p>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <span><IssuesStatus status={issues.status} /></span>
             <p>{issues.createdAt.toDateString()}</p>
           </div>
         </div>
@@ -41,7 +51,7 @@ const adminDetailIss = async ({ params }) => {
       </div>
       <div className='flex flex-row'>
         <IssueButton id={issues.id} status={issues.status} />
-        <DeleteButton  id={issues.id} title={issues.title}/>
+        <DeleteButton id={issues.id} title={issues.title} />
       </div>
     </div>
   );
