@@ -43,7 +43,8 @@ const handler = NextAuth({
             id: user.id,
             email: user.email,
             name: user.name,
-            image: user.image || null
+            image: user.image || null,
+            role: user.role
           };
         }
 
@@ -64,7 +65,8 @@ const handler = NextAuth({
           id: createdUser.id,
           email: createdUser.email,
           name: createdUser.name,
-          image: createdUser.image || null
+          image: createdUser.image || null,
+          role: createdUser.role
         };
       }
     })
@@ -72,6 +74,20 @@ const handler = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: 'jwt'
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role ?? token.role ?? 'CLIENT';
+      }
+
+      return token;
+    },
+
+    async session({ session, token }) {
+      session.user.role = token.role ?? 'CLIENT';
+      return session;
+    }
   }
 })
 

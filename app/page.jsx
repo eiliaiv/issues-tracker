@@ -15,13 +15,17 @@ export default function SignInPage() {
   const [error, setError] = useState("")
   const [spinner, setSpinner] = useState(false)
   const isVisible = useNotif(error, setError, 2000);
-  const { status } = useSession()
+  const { status, data: session } = useSession()
   const router = useRouter()
 
-  useEffect(() => {
-    if (status === "authenticated")
-      router.push("/issue")
-  }, [status])
+   useEffect(() => {
+     if (status === "authenticated")
+       if (session?.user?.role === "ADMIN") { router.push("/admin") } else {
+         router.push("/issue")
+
+       }
+   }, [status])
+  console.log(session?.user?.role)
 
 
   const handleCredentialsLogin = async (e) => {

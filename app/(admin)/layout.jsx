@@ -1,10 +1,14 @@
 import React from 'react'
+import NavBar from "../(client)/components/NavBar"
 
-const layout = ({children}) => {
+const layout = ({ children }) => {
   return (
-    <div className='p-10'>
-      {children}
-    </div>
+    <>
+      <NavBar />
+      <div className="px-8">
+        {children}
+      </div>
+    </>
   )
 }
 
