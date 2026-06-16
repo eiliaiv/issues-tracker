@@ -4,12 +4,12 @@ import React from 'react';
 import {prisma} from '../../../lib/client';
 import { notFound } from 'next/navigation';
 import { Card, Flex, Heading, Grid, Box, Button } from '@radix-ui/themes';
-import IssuesStatus from '../components/IssuesStatus';
+import IssuesStatus from '../../components/IssuesStatus';
 import Markdown from 'react-markdown';
 import { Pencil2Icon } from '@radix-ui/react-icons';
 import Link from 'next/link';
-import DeleteButton from '../components/DeleteButton';
-import EditButton from '../components/EditButton';
+import DeleteButton from '../../components/DeleteButton';
+import EditButton from '../../components/EditButton';
 
 
 const IssuesDetailPage = async ({ params }) => {

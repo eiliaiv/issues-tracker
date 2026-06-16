@@ -8,10 +8,10 @@ import { Button, TextField } from "@radix-ui/themes";
 import "easymde/dist/easymde.min.css";
 import { useForm, Controller } from "react-hook-form"
 import axios from 'axios';
-import Notification from '../components/Notification';
-import SpinnerLil from '../components/SpinnerLil';
-import SpinnerBig from '../components/SpinnerBig';
-import {useNotif} from '../hook/useNotif';
+import Notification from '../../components/Notification';
+import SpinnerLil from '../../components/SpinnerLil';
+import SpinnerBig from '../../components/SpinnerBig';
+import {useNotif} from '../../hook/useNotif';
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,

@@ -2,8 +2,6 @@ import { Callout } from "@radix-ui/themes";
 import { Cross2Icon } from "@radix-ui/react-icons";
 
 
-import React from 'react'
-
 const Notification = ({children, isVisible, color}) => {
   return (
     <Callout.Root

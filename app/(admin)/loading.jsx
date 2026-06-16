@@ -1,5 +1,5 @@
 
-import SpinnerBig from '../../components/SpinnerBig'
+import SpinnerBig from '../(client)/components/SpinnerBig'
 
 const loading = () => {
   return (

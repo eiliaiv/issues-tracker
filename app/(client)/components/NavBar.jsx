@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import classname from 'classnames';
 import { Avatar, Box, Text, DropdownMenu } from '@radix-ui/themes';
 import { useSession } from 'next-auth/react';
-import { useState } from "react"
 import { useRouter } from 'next/navigation';
 
 const NavBar = () => {
@@ -49,14 +48,14 @@ const NavBar = () => {
                   {status === "unauthenticated" && <Link href="/api/auth/signin">Log in</Link>}</Box></DropdownMenu.Item>
               </DropdownMenu.Content>
             </DropdownMenu.Root>)
-            :
-            <div>
-               <button onClick={()=>router.push("/signin")}>
-                <Avatar variant='solid' radius='full' fallback="G"></Avatar>
-               </button>
-            </div>}
-        </div>
+        :
+        <div>
+          <button onClick={() => router.push("/signin")}>
+            <Avatar variant='solid' radius='full' fallback="G"></Avatar>
+          </button>
+        </div>}
       </div>
+    </div>
     </nav >
   );
 }

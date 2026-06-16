@@ -15,7 +15,7 @@ export default function NotFound({ message }) {
         <h1 className='text-2xl font-light'>Issue Not Found</h1>
         <p className='font-extralight text-center text-sm mb-5'>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
         <div className='flex gap-4'>
-          <Link href="/issue">
+          <Link href="/home">
             <Button>Back to issues page</Button>
           </Link>
           <Button onClick={() => window.location.reload()} ><ReloadIcon />reload</Button>
